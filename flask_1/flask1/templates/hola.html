@@ -5,14 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title></title>
-
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   </head>
   <body>
+
+    <nav class="navbar navbar-inverse bg-inverse">
+      <div class="col-sm-10">
+      <a class="navbar-brand" href="{{ url_for('sitio')}}">SSBW</a>
+      </div>
+      <div class="col-sm-2 justify-content-end">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" type="button">Iniciar sesión </button>
+      </div>
+    </nav>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+          </div>
+          <form class="form-signin">
+          <div class="modal-body">
+
+              <h2 class="form-signin-heading">Please sign in</h2>
+              <label for="inputEmail" class="sr-only">Email address</label>
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+              <label for="inputPassword" class="sr-only">Password</label>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-lg btn-primary btn-block" data-dismiss="modal" type="submit">Sign in</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     hola {{ var }}
     <ul>
       {% for user in usuarios %}
-      <li>{{user.name}}, {{user.dni}}</li>
+      <li>{{user.name}} {{user.dni}}</li>
       {% endfor %}
     </ul>
 y un <a href="{{ url_for('enviar_archivo2')}}">Algo de archivo</a>
@@ -20,22 +76,8 @@ y un <a href="{{ url_for('enviar_archivo2')}}">Algo de archivo</a>
 
     <div class="container">
 
-        <form class="form-signin">
-          <h2 class="form-signin-heading">Please sign in</h2>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+
 
       </div> <!-- /container -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
   </body>
 </html>

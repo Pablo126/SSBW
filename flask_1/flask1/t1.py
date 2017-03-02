@@ -33,10 +33,17 @@ def enviar_archivo2():
 @app.route('/sitio')
 def sitio():
     usuarios = []
-    usuarios.append({'name':"Pablo", 'dni':"1472"})
+    usuarios.append({'name':'Pablo', 'dni':'1472'})
     usuarios.append({'name':'Pablo2', 'dni':'123'})
     usuarios.append({'name':'Pablo3', 'dni':'1111'})
-    return render_template('hola.html', var='esto', usuarios='usuarios')
+    return render_template('hola.html', var='esto', usuarios=usuarios)
+def login():
+    usuarios = []
+    usuarios.append({'name':'Pablo', 'dni':'1472'})
+    usuarios.append({'name':'Pablo2', 'dni':'123'})
+    usuarios.append({'name':'Pablo3', 'dni':'1111'})
+    return render_template('hola.html', var='esto', usuarios=usuarios)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True)
