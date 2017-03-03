@@ -1,6 +1,6 @@
-from flask import Flask, Response, render_template
+from flask import Flask, Response, url_for, render_template, session, redirect, request
 app = Flask(__name__)
-
+app.secret_key = 'F12Zr47j\3yX R~X@H!jmM]Lwf/,?KT'
 @app.route('/hello')
 def hello():
     return 'Hello, <b>World</b>'
@@ -30,19 +30,25 @@ def enviar_archivo2():
     response.set_data(imagen);
     return response
 
-@app.route('/sitio')
+@app.route('/')
 def sitio():
     usuarios = []
-    usuarios.append({'name':'Pablo', 'dni':'1472'})
     usuarios.append({'name':'Pablo2', 'dni':'123'})
     usuarios.append({'name':'Pablo3', 'dni':'1111'})
-    return render_template('hola.html', var='esto', usuarios=usuarios)
+    return render_template('index.html', var='esto', usuarios=usuarios)
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    usuarios = []
-    usuarios.append({'name':'Pablo', 'dni':'1472'})
-    usuarios.append({'name':'Pablo2', 'dni':'123'})
-    usuarios.append({'name':'Pablo3', 'dni':'1111'})
-    return render_template('hola.html', var='esto', usuarios=usuarios)
+    if request.method == 'POST':
+        session['user'] = request.form['username']
+    return redirect(url_for('sitio'))
+    #return render_template('index.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('sitio'))
 
 
 if __name__ == '__main__':
