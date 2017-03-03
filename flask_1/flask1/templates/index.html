@@ -14,8 +14,9 @@
     <!-- Barra de navegación -->
     <nav class="navbar navbar-inverse bg-inverse">
       <div class="col-sm-8">
-      <a class="navbar-brand" >SSBW</a>
-
+      <h1>SSBW - Juan Pablo González</h1>
+      <a href="{{ url_for('archivo') }}">Imagen </a>
+      <a href="{{ url_for('texto') }}">Texto </a>
       </div>
       <div class="col-sm-2">
             <label>{{session['user']}}</label>
@@ -58,15 +59,13 @@
       </div>
     </div>
     <!-- Datos de distinta manera -->
+    {% block contenido %}
     <div class="container">
-      hola {{ var }}
-      <ul>
-        {% for user in usuarios %}
-        <li>{{user.name}} {{user.dni}}</li>
-        {% endfor %}
-      </ul>
-        <a href="{{ url_for('enviar_archivo2')}}">Algo de archivo</a>
-      <br>
-      </div> <!-- /container -->
+      <h2>VACIOOOOO</h2>
+    </div> <!-- /container -->
+    {% endblock %}
+
+
+
   </body>
 </html>
