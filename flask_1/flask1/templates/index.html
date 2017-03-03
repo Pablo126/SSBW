@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   </head>
   <body>
-
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-inverse bg-inverse">
       <div class="col-sm-8">
       <a class="navbar-brand" >SSBW</a>
@@ -28,7 +28,6 @@
         {% endif %}
       </div>
     </nav>
-
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -52,39 +51,22 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
           </div>
           </form>
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    hola {{ var }}
-    <ul>
-      {% for user in usuarios %}
-      <li>{{user.name}} {{user.dni}}</li>
-      {% endfor %}
-    </ul>
-y un <a href="{{ url_for('enviar_archivo2')}}">Algo de archivo</a>
-    <br>
-
+    <!-- Datos de distinta manera -->
     <div class="container">
-
-
-
+      hola {{ var }}
+      <ul>
+        {% for user in usuarios %}
+        <li>{{user.name}} {{user.dni}}</li>
+        {% endfor %}
+      </ul>
+        <a href="{{ url_for('enviar_archivo2')}}">Algo de archivo</a>
+      <br>
       </div> <!-- /container -->
   </body>
 </html>
