@@ -3,9 +3,7 @@
 <div class="container">
   <h1>Restaurante</h1>
   <ul>
-  {% for r in resta %}
-  <li>{{ r.name }}, {{ r.cuisine }} <a href="{% url 'restaurante' r.restaurant_id %}">Detalles</a></li>
-  {% endfor %}
+  <li>{{ resta.name }}, {{ resta.cuisine }} <a href="{% url 'restaurante' r.restaurant_id %}">Detalles</a></li>
   </ul>
 </div>
 {% endblock %}
