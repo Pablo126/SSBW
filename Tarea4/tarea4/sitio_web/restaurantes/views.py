@@ -11,6 +11,6 @@ def test(request):
 
 def listar(requests):
      context = {
-        "resta": restaurants.objectcs[:5], # los cinco primeros
+        "resta": restaurants.objects[:5], # los cinco primeros
      }
      return render (requests, 'restaurantes/listar.html', context)
