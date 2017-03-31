@@ -1,8 +1,13 @@
 from django.shortcuts import render, HttpResponse
 from .models import restaurants
+import logging
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+logger = logging.getLogger(__name__)
+
 def index(request):
+    logger.info('Una visita más')
     context = {}
     return render(request,'index.html',context)
 
@@ -24,6 +29,7 @@ def buscar(request):
     }
     return render(request, 'restaurantes/listar.html', context)
 
+@login_required
 def restaurante(request, id):
     r = restaurants.objects(restaurant_id=id)[0]
     context = {
