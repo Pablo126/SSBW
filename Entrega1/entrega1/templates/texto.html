@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% block contenido %}
+hola {{ var }}
+<ul>
+  {% for user in usuarios %}
+  <li>{{user.name}} {{user.dni}}</li>
+  {% endfor %}
+</ul>
+<br>
+{% endblock %}

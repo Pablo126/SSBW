@@ -36,3 +36,15 @@ def restaurante(request, id):
         "resta": r
     }
     return render (request, 'restaurantes/restaurante.html', context)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['user'] = request.form['username']
+    return redirect(url_for('sitio'))
+    #return render_template('index.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('sitio'))
