@@ -21,7 +21,7 @@ class likes(EmbeddedDocument):
 
 class restaurants(Document):
     name             = StringField(required=True, max_length=80)
-    restaurant_id    = StringField()
+    restaurant_id    = IntField(min_value=1, unique=True)
     cuisine          = StringField()
     borough          = StringField()
     address          = EmbeddedDocumentField(addr)              # en la misma collección

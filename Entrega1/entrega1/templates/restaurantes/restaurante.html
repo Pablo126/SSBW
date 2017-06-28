@@ -1,10 +1,17 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% block contenido %}
 <div class="container">
   <h1>Resultados</h1>
   <ul>
-  <li>Nombre:{{ resta.name }}</li>
-  <li>Cocina:{{ resta.cuisine }}</li>
+  <li>Nombre: {{ resta.name }}</li>
+  <li>Cocina: {{ resta.cuisine }}</li>
+  Imagen:
+  {% if resta.photo %}
+    <img  src="{% static 'img/restaurantes/'|add:photo|add:'.jpg' %}" alt="Foto del restaurante {{ resta.name }}">
+  {% else %}
+    <h3>No hay foto</h3>
+  {% endif %}
   </ul>
 </div>
 {% endblock %}

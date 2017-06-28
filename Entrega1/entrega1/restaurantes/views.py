@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import restaurants
+from .forms import RestaurantForm
 import logging
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -23,24 +24,46 @@ def test(request):
     context = {} #Aqui van las variables para la plantilla
     return render(request,'test.html',context)
 
-# def listar(request):
-#      context = {
-#         "resta": restaurants.objects[:5], # los cinco primeros
-#      }
-#      return render (request, 'restaurantes/listar.html', context)
+@login_required
+def listar(request):
+    context = {"resta": restaurants.objects[:5]} # los cinco primeros
+    return render (request, 'restaurantes/listar.html', context)
 
-# def buscar(request):
-#     cocina = request.GET.get('cocina')
-#     lista = restaurants.objects(cuisine__icontains=cocina)
-#     context = {
-#         "resta": lista
-#     }
-#     return render(request, 'restaurantes/listar.html', context)
+def buscar(request):
+    cocina = request.GET.get('cocina')
+    lista = restaurants.objects(cuisine__icontains=cocina)
+    context = {
+        "resta": lista
+    }
+    return render(request, 'restaurantes/listar.html', context)
 
 @login_required
 def restaurante(request, id):
     r = restaurants.objects(restaurant_id=id)[0]
     context = {
-        "resta": r
+        "resta": r,
+        "photo": str(r.restaurant_id)
     }
     return render (request, 'restaurantes/restaurante.html', context)
+
+@login_required
+def add(request):
+    if request.method == "POST":
+        form = RestaurantForm(request.POST, request.FILES)
+        if form.is_valid():
+            if len(request.FILES) != 0:
+                handle_uploaded_file(restaurants.objects.count() + 1, request.FILES['photo'])
+            r = form.save()
+            return redirect('listar')
+    else:
+        form = RestaurantForm();
+    # GET o error
+    context = {
+        'form': form,
+    }
+    return render(request, 'restaurantes/add.html', context)
+
+def handle_uploaded_file(n, f):
+    with open('static/img/restaurantes/' + str(n) + '.jpg', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

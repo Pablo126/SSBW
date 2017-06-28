@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block contenido %}
 <div class="container">
-  <h1>Restaurante</h1>
+  <h1>Listado restaurantes</h1>
+  <form method="get" action="{% url 'buscar' %}">
+          <input type="text" placeholder="Tipo de cocina" name="cocina">
+          <button type="submit">Buscar</button>
+  </form>
+  <br>
   <ul>
     {% for r in resta %}
   <li>{{ r.name }}, {{ r.cuisine }} <a href="{% url 'restaurante' r.restaurant_id %}">Detalles</a></li>
-  </ul>
     {% endfor %}
+  </ul>
+
 </div>
 {% endblock %}
