@@ -3,6 +3,7 @@ from .models import restaurants
 from .forms import RestaurantForm
 import logging
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 # Create your views here.
 
 logger = logging.getLogger(__name__)
@@ -13,11 +14,11 @@ def index(request):
     return render(request,'index.html',context)
 
 def archivo(request):
-    context = {}
+    context = {        "menu": "imagen"}
     return render(request,'archivo.html',context)
 
 def texto(request):
-    context = {}
+    context = {        "menu": "texto"}
     return render(request,'texto.html',context)
 
 def test(request):
@@ -26,7 +27,10 @@ def test(request):
 
 @login_required
 def listar(request):
-    context = {"resta": restaurants.objects[:5]} # los cinco primeros
+    context = {
+        "resta": restaurants.objects[:5],
+        "menu": "list"
+        } # los cinco primeros
     return render (request, 'restaurantes/listar.html', context)
 
 def buscar(request):
@@ -60,8 +64,14 @@ def add(request):
     # GET o error
     context = {
         'form': form,
+        "menu": "add"
     }
     return render(request, 'restaurantes/add.html', context)
+
+def detalles(request):
+    r = restaurants.objects(restaurant_id=request.GET.get('id'))[0]
+    v = r.borough
+    return JsonResponse({'v': v})
 
 def handle_uploaded_file(n, f):
     with open('static/img/restaurantes/' + str(n) + '.jpg', 'wb+') as destination:

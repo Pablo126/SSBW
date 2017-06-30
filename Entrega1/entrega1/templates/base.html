@@ -11,14 +11,25 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
   </head>
   <body>
+
     <!-- Barra de navegación -->
     <nav class="navbar navbar-inverse bg-inverse">
-      <div class="col-sm-8">
-      <h1>SSBW - Juan Pablo González</h1>
-      <a href="{% url 'archivo' %}"><button type="button" class="btn btn-primary btn-sm">Imagen </button></a>
-      <a href="{% url 'texto' %}"><button type="button" class="btn btn-primary btn-sm">Texto </button></a>
-      <a href="{% url 'listar' %}"><button type="button" class="btn btn-primary btn-sm">Listar rest. </button></a>
-      <a href="{% url 'add' %}"><button type="button" class="btn btn-primary btn-sm">Nuevo rest. </button></a>
+      <div class="col-sm-8" id="">
+        <h1>SSBW - Juan Pablo González</h1>
+        <ul class="nav nav-pills">
+          <li class="nav-item" id="menu-image">
+            <a class="nav-link" href="{% url 'archivo' %}">Imagen </a>
+          </li>
+          <li class="nav-item" id="menu-text">
+            <a class="nav-link" href="{% url 'texto' %}">Texto </a>
+          </li>
+          <li class="nav-item" id="menu-list">
+            <a class="nav-link" href="{% url 'listar' %}">Listar rest.</a>
+          </li>
+          <li class="nav-item" id="menu-add">
+            <a class="nav-link" href="{% url 'add' %}">Nuevo rest. </a>
+          </li>
+        </ul>
       </div>
       <div class="col-sm-2">
             {% if user.is_authenticated %}
@@ -43,6 +54,11 @@
     {% endblock %}
 
 
-
+      <script>
+      $(document).ready(function () {
+        var menuOption = "{{ menu }}";
+        $("#menu-{{ menu }}").addClass("disable");
+      });
+      </script>
   </body>
 </html>

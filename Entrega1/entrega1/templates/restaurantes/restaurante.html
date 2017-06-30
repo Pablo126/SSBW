@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 {% load static %}
 {% block contenido %}
+<script>
+$(document).ready(function(){
+    $("#modalBtn").click(function(){
+      $.ajax({
+          url: "{% url 'detalles' %}",
+          data: { id: {{resta.restaurant_id}} },
+          type: "GET",
+          dataType: "json",
+          error: function() {
+            alert("Ha habido un error");
+          },
+          success: function(data) {
+            $('#detalles').text(data.v);
+            $('#detallesModal').modal('show');
+          }
+      })
+    });
+});
+</script>
+
 <div class="container">
   <h1>Resultados</h1>
   <ul>
   <li>Nombre: {{ resta.name }}</li>
   <li>Cocina: {{ resta.cuisine }}</li>
+  <li><button type="button" class="btn btn-primary pull-right" id="modalBtn">Más</button></li>
   Imagen:
   {% if resta.photo %}
     <img  src="{% static 'img/restaurantes/'|add:photo|add:'.jpg' %}" alt="Foto del restaurante {{ resta.name }}">
@@ -13,5 +34,28 @@
     <h3>No hay foto</h3>
   {% endif %}
   </ul>
+
+
 </div>
+
+<div class="modal fade" id="detallesModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles de restaurante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><span id="detalles"></span> </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}

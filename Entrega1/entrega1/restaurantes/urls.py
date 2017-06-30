@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^archivo/$', views.archivo, name='archivo'),
     url(r'^texto/$', views.texto, name='texto'),
     url(r'^restaurante/(?P<id>[0-9]+)$', views.restaurante, name='restaurante'),
+    url(r'^detalles/$', views.detalles, name='detalles'),
 ]
